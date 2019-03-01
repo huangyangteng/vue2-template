@@ -10,7 +10,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/apis':{
+        target:'http://v.juhe.cn',//后台地址 proxyTable  把/apis映射成target 即 /apis=http://v.juhe.cn
+        changeOrigin:true,//是否跨域
+        pathRewrite:{
+          '^/apis':''
+        }
+      }
+
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -20,7 +29,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */
