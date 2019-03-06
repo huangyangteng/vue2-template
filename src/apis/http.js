@@ -7,7 +7,7 @@ var instance = axios.create({
 })
 
 
-//------------------- 一、请求拦截器 忽略
+//------------------- 一、请求拦截器
 instance.interceptors.request.use(function (config) {
 
     return config;
@@ -17,7 +17,7 @@ instance.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 
-//----------------- 二、响应拦截器 忽略
+//----------------- 二、响应拦截器
 instance.interceptors.response.use(function (response) {
 
     return response.data;
