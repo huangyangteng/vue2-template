@@ -5,6 +5,7 @@
     密码<input type="password" v-model="pass">
     <input type="button" @click="reg" value="注册">
     <input type="button" @click="login" value="登录">
+    <input type="button" @click="logout" value="注销">
   </div>
 </template>
 <script>
@@ -39,8 +40,8 @@ export default {
         localStorage.setItem('token',data.token)
         console.log(localStorage.getItem('token'))
         // alert(JSON.stringify(data))
-
         this.cleanForm()
+        this.$router.push('/')
       } catch (error) {
         console.log(error)
       }
@@ -48,8 +49,12 @@ export default {
     cleanForm(){
       this.user=''
       this.pass=''
+    },
+    logout(){
+      localStorage.removeItem('token')
     }
   },
+
 
 }
 </script>
