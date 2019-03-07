@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <Button>Default</Button>
+    <Button type="primary">Primary</Button>
+    <Button type="dashed">Dashed</Button>
+    <br>
+    <br>
+    <br>
     <router-view/>
   </div>
 </template>

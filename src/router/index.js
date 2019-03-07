@@ -13,9 +13,7 @@ const router= new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      meta:{requireAuth:true},
-      component: Home
+      redirect:'/home'
     },
     {
       path: '/home',
