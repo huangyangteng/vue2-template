@@ -11,8 +11,15 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
+      // '/apis':{
+      //   target:'http://118.24.85.97:22222',//后台地址 proxyTable  把/apis映射成target 即 /apis=http://118.24.85.97:22222
+      //   changeOrigin:true,//是否跨域
+      //   pathRewrite:{
+      //     '^/apis':''
+      //   }
+      // }
       '/apis':{
-        target:'http://v.juhe.cn',//后台地址 proxyTable  把/apis映射成target 即 /apis=http://v.juhe.cn
+        target:'http://localhost:22222',//后台地址 proxyTable  把/apis映射成target 即 /apis=http://118.24.85.97:22222
         changeOrigin:true,//是否跨域
         pathRewrite:{
           '^/apis':''

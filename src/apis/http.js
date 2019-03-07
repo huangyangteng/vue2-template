@@ -5,7 +5,10 @@ var instance = axios.create({
     baseURL:apiConfig.baseUrl,
     timeout: 6000
 })
-
+// 测试instance好不好使
+// instance.get('/api')
+//   .then(res=>console.log(res))
+//   .catch(err=>console.log(err))
 
 //------------------- 一、请求拦截器
 instance.interceptors.request.use(function (config) {
