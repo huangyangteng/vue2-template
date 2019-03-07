@@ -11,14 +11,11 @@
 </template>
 
 <script>
-// import {JOKE} from './apis/auth.js'
 export default {
   name: 'App',
-  // async mounted() {
-  //   let data=await JOKE({ key:'0a910595de1af40b2cf7ee6291faca7c'})
-  //   console.log(data)
-  // },
-
+  mounted() {
+    console.log.apply(window,[1,2,3])
+  },
 }
 </script>
 

@@ -3,12 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+// import iview on demand
 import './assets/styles/base.less'
-
 import iviewComs from './components/iview-coms'
 Vue.use(iviewComs)
 
+// polyfill
+import 'babel-polyfill'
+import './polyfill/polyfill'
 
+// tip in browser’s console
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
