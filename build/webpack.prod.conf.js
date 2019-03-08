@@ -15,6 +15,8 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const ParallelUglifyP=require('webpack-parallel-uglify-plugin')
 // 这个插件节约70%的打包时间 牛逼
 const hardSourceP=require('hard-source-webpack-plugin')
+// 预渲染
+const PrerenderSpaP=require('prerender-spa-plugin')
 
 const env = require('../config/prod.env')
 
@@ -125,7 +127,14 @@ const webpackConfig = merge(baseWebpackConfig, {
       }
     ]),
     // 打包完成后，起一个服务器，报告性能
-    // new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin(),
+    // 预渲染
+    new PrerenderSpaP(
+      // 输出目录的绝对路径
+      path.join(__dirname,'../dist'),
+      //预渲染路由
+      ['/login','/test']
+    )
   ]
 })
 
