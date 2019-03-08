@@ -13,9 +13,7 @@
 <script>
 export default {
   name: 'App',
-  mounted() {
-    console.log.apply(window,[1,2,3])
-  },
+
 }
 </script>
 

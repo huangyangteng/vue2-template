@@ -38,7 +38,6 @@ router.beforeEach((to,from,next)=>{//增加登录验证
 
   if(to.matched.some(item=>item.meta.requireAuth) && !token){
      //对于需要权限的页面，如果不存在token,则跳转到登录页
-    alert('请先登录')
     next({
       path:'/login',
     })

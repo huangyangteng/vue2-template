@@ -9,9 +9,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+//打包完成后，起一个报告提及的网页
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// 多线程压缩代码
 const ParallelUglifyP=require('webpack-parallel-uglify-plugin')
+// 这个插件节约70%的打包时间 牛逼
+const hardSourceP=require('hard-source-webpack-plugin')
 
 const env = require('../config/prod.env')
 
@@ -30,19 +33,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
+    new hardSourceP(),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    // new UglifyJsPlugin({
-    //   uglifyOptions: {
-    //     compress: {
-    //       warnings: false
-    //     }
-    //   },
-    //   sourceMap: config.build.productionSourceMap,
-    //   parallel: true
-    // }),
     new ParallelUglifyP({
       cacheDir:'.cache/',//设置缓存路径，不改动的调用缓存
       uplifyJS:{
@@ -128,7 +123,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    // 打包完成后，起一个服务器，报告性能
+    // new BundleAnalyzerPlugin()
   ]
 })
 
