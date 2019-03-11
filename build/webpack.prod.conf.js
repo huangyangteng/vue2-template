@@ -129,11 +129,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     // 打包完成后，起一个服务器，报告性能
     // new BundleAnalyzerPlugin(),
     // 预渲染
-    new PrerenderSpaP(
-      // 输出目录的绝对路径
-      path.join(__dirname,'../dist'),
-      //预渲染路由
-      ['/login','/test']
+    new PrerenderSpaP({
+      staticDir: path.join(__dirname, '../dist'),
+      // Required - Routes to render.
+      routes: ['/home','/login']
+    }
     )
   ]
 })

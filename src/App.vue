@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="isShow">
     <Button>Default</Button>
     <Button type="primary">Primary</Button>
     <Button type="dashed">Dashed</Button>
@@ -13,7 +13,16 @@
 <script>
 export default {
   name: 'App',
-
+  data() {
+    return {
+      isShow:true
+    }
+  },
+  mounted() {
+    // setTimeout(() => {
+    //   this.isShow=false
+    // }, 3000,this);
+  },
 }
 </script>
 
