@@ -1,4 +1,7 @@
 'use strict'
+/**
+ * 生产环境配置
+ */
 const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')
@@ -9,14 +12,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-//打包完成后，起一个报告提及的网页
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-// 多线程压缩代码
-const ParallelUglifyP=require('webpack-parallel-uglify-plugin')
-// 这个插件节约70%的打包时间 牛逼
-const hardSourceP=require('hard-source-webpack-plugin')
-// 预渲染
-const PrerenderSpaP=require('prerender-spa-plugin')
+/**优化：提高打包速度，提高首屏加载速度 */
+const ParallelUglifyP=require('webpack-parallel-uglify-plugin')// 多线程压缩代码
+const hardSourceP=require('hard-source-webpack-plugin')// 这个插件节约70%的打包时间 牛逼
+const PrerenderSpaP=require('prerender-spa-plugin')// 预渲染
 
 const env = require('../config/prod.env')
 
@@ -35,12 +34,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
-    new hardSourceP(),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new ParallelUglifyP({
+    new hardSourceP(),//提高打包速度
+    new ParallelUglifyP({//多线程压缩代码
       cacheDir:'.cache/',//设置缓存路径，不改动的调用缓存
       uplifyJS:{
         output: {
@@ -52,7 +51,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     // extract css into its own file
-    new ExtractTextPlugin({
+    new ExtractTextPlugin({//提取css文本
       filename: utils.assetsPath('css/[name].[contenthash].css'),
       // Setting the following option to `false` will not extract CSS from codesplit chunks.
       // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
@@ -62,7 +61,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
-    new OptimizeCSSPlugin({
+    new OptimizeCSSPlugin({//优化css配置
       cssProcessorOptions: config.build.productionSourceMap
         ? { safe: true, map: { inline: false } }
         : { safe: true }
@@ -89,7 +88,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // enable scope hoisting
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
-    new webpack.optimize.CommonsChunkPlugin({
+    new webpack.optimize.CommonsChunkPlugin({//抽取公共模块
       name: 'vendor',
       minChunks (module) {
         // any required modules inside node_modules are extracted to vendor
@@ -119,7 +118,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
 
     // copy custom static assets
-    new CopyWebpackPlugin([
+    new CopyWebpackPlugin([//复制，比如打包完之后需要把打包的文件复制到dist里面
       {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
@@ -138,7 +137,10 @@ const webpackConfig = merge(baseWebpackConfig, {
   ]
 })
 
-if (config.build.productionGzip) {
+
+
+
+if (config.build.productionGzip) {//如果开启了gzip，就引入插件，压缩代码
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
   webpackConfig.plugins.push(
@@ -156,7 +158,7 @@ if (config.build.productionGzip) {
   )
 }
 
-if (config.build.bundleAnalyzerReport) {
+if (config.build.bundleAnalyzerReport) {//如果使用--report插件，就新启动一个网页，报告打包信息
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }

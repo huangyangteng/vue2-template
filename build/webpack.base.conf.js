@@ -1,4 +1,7 @@
 'use strict'
+/**
+ * 开发和生产共同使用的基础配置文件，主要实现配置入口、输出、resolve和插件
+ */
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
@@ -8,7 +11,7 @@ const HappyPack=require('happypack')
 const os=require('os')
 var happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
-function resolve (dir) {
+function resolve (dir) {//拼出绝对路径
   return path.join(__dirname, '..', dir)
 }
 
@@ -26,11 +29,14 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
-  resolve: {
+  resolve: {//自动添加后缀
     extensions: ['.js', '.vue', '.json'],
-    alias: {
+    alias: {//创建路径的别名
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'components':resolve('src/components'),
+      'styles':resolve('src/assets/styles'),
+      'views':resolve('src/views')
     }
   },
   module: {
