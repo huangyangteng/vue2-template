@@ -128,10 +128,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     // 打包完成后，起一个服务器，报告性能
     // new BundleAnalyzerPlugin(),
     // 预渲染
+    //预渲染的路由不能是懒加载的,否则会报webpackJsonp is not define的错误
+    //
     new PrerenderSpaP({
       staticDir: path.join(__dirname, '../dist'),
       // Required - Routes to render.
-      routes: ['/home','/login']
+      routes: ['/','/login']
     }
     )
   ]

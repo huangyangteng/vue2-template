@@ -3,8 +3,6 @@
 var isPro = process.env.NODE_ENV=== 'production'
 // 如果是生产环境 我们就使用服务器的uri，如果是开发环境，我们就添加/apis前缀
 module.exports = {
-    baseUrl: isPro ? 'http://118.24.85.97:22222' : '/apis'
+    baseUrl: isPro ? 'http://localhost:80' : '/apis'
 }
-// module.exports={
-//   baseUrl:isPro?'http://192.168.0.100:22222':'/apis'
-// }
+

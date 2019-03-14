@@ -12,6 +12,11 @@ Vue.use(iviewComs)
 import 'babel-polyfill'
 import './polyfill/polyfill'
 
+// utils
+import Util from './utils/index'
+Vue.use(Util)
+
+
 // tip in browser’s console
 Vue.config.productionTip = false
 
@@ -20,5 +25,8 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  mounted() {
+    // console.log(this.$utils.pick({a:1,b:2},['a']))
+  },
 })

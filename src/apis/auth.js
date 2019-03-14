@@ -5,7 +5,7 @@ import req from './http.js'
 //定义接口
 
 //在这里定义了一个登陆的接口，把登陆的接口暴露出去给组件使用
-export const LOGIN =params=>req('post','/api/users/login',params)
+export const LOGIN =params=>req('post','/api/users/login.do',params)
 //这里使用了箭头函数，转换一下写法：
 // export const LOGIN=function(params){
 //   return req('post','/api/login',params)

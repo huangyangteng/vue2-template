@@ -15,20 +15,20 @@ module.exports = {
     assetsSubDirectory: 'static',// 子目录，一般存放静态文件
     assetsPublicPath: '/',//根目录
     proxyTable: {
+      '/apis':{
+        target:'http://118.24.85.97:22222',//后台地址 proxyTable  把/apis映射成target 即 /apis=http://118.24.85.97:22222
+        changeOrigin:true,//是否跨域
+        pathRewrite:{
+          '^/apis':''
+        }
+      },
       // '/apis':{
-      //   target:'http://118.24.85.97:22222',//后台地址 proxyTable  把/apis映射成target 即 /apis=http://118.24.85.97:22222
+      //   target:'http://localhost:22222',//后台地址 proxyTable  把/apis映射成target 即 /apis=http://118.24.85.97:22222
       //   changeOrigin:true,//是否跨域
       //   pathRewrite:{
       //     '^/apis':''
       //   }
       // }
-      '/apis':{
-        target:'http://localhost:22222',//后台地址 proxyTable  把/apis映射成target 即 /apis=http://118.24.85.97:22222
-        changeOrigin:true,//是否跨域
-        pathRewrite:{
-          '^/apis':''
-        }
-      }
 
     },
 
